@@ -179,11 +179,15 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Companies.cs" />
+    <Compile Include="Models\CompaniesInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ITrackDB.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\RolesInitializer.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -245,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

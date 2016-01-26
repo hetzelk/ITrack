@@ -9,5 +9,7 @@ namespace ITrack.Models
     public class ITrackDB : DbContext
     {
         DbSet<Roles> roles { get; set; }
+        DbSet<User> user { get; set; }
+        DbSet<Companies> companies { get; set; }
     }
 }
