@@ -254,6 +254,8 @@
     <Content Include="Views\Tracker\Tracker2.cshtml" />
     <Content Include="Views\Tracker\Tracker3.cshtml" />
     <Content Include="Views\Tracker\Tracker4.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
