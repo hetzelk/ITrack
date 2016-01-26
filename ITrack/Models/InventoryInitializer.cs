@@ -6,9 +6,9 @@ using System.Data.Entity;
 
 namespace ITrack.Models
 {
-    public class CompaniesInitializer : DropCreateDatabaseIfModelChanges<Companies>
+    public class InventoryInitializer : DropCreateDatabaseIfModelChanges<Inventory>
     {
-        protected override void Seed(Companies context)
+        protected override void Seed(Inventory context)
         {
             base.Seed(context);
         }
