@@ -234,6 +234,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Users\Users0.cshtml" />
+    <Content Include="Views\Users\Users1.cshtml" />
+    <Content Include="Views\Users\Users4.cshtml" />
+    <Content Include="Views\Users\Users2.cshtml" />
+    <Content Include="Views\Inventory\Inventory0.cshtml" />
+    <Content Include="Views\Inventory\Inventory1.cshtml" />
+    <Content Include="Views\Inventory\Inventory2.cshtml" />
+    <Content Include="Views\Inventory\Inventory3.cshtml" />
+    <Content Include="Views\Catalog\CatalogAll.cshtml" />
+    <Content Include="Views\Catalog\CatalogOutsider.cshtml" />
+    <Content Include="Views\Tickets\Tickets0.cshtml" />
+    <Content Include="Views\Tickets\Tickets2.cshtml" />
+    <Content Include="Views\Tickets\Tickets1.cshtml" />
+    <Content Include="Views\Tickets\Tickets3.cshtml" />
+    <Content Include="Views\Tickets\Tickets4.cshtml" />
+    <Content Include="Views\Tracker\Tracker0.cshtml" />
+    <Content Include="Views\Tracker\Tracker1.cshtml" />
+    <Content Include="Views\Tracker\Tracker2.cshtml" />
+    <Content Include="Views\Tracker\Tracker3.cshtml" />
+    <Content Include="Views\Tracker\Tracker4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
