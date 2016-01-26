@@ -196,8 +196,8 @@
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\TicketsInitializer.cs" />
     <Compile Include="Models\InventoryInitializer.cs" />
-    <Compile Include="Models\TrackerInitializer.cs" />
     <Compile Include="Models\RolesInitializer.cs" />
+    <Compile Include="Models\TrackerInitializer.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\UsersInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
