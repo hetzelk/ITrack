@@ -7,17 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ITrack.Controllers
 {
     public class UsersController : Controller
     {
         private ITrackDB db = new ITrackDB();
+        IdentityUser iu = new IdentityUser();
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(iu.UserName);
+            //return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5

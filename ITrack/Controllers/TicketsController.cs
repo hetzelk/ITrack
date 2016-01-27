@@ -17,7 +17,15 @@ namespace ITrack.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-            return View(db.Tickets.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(db.Tickets.ToList());
+            }
+            else
+            {
+            return Redirect("~/Account/Login");
+
+            }
         }
 
         // GET: Tickets/Details/5
