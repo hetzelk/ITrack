@@ -3,12 +3,50 @@
 }
 
 <div class="jumbotron">
-    <h1>ITrack*</h1>
-    <p class="lead">IT Tracker</p>
+    <h1>ITrack<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></h1>
+    <p class="lead">ITrack* tracks all of your company needs. We are the leading interface in the industry. Guaranteed <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></p>
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
+        <h3>Users Buttons</h3>
+        <p>@Html.ActionLink("Create", "Create", "Users", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Delete", "Delete", "Users", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Details", "Details", "Users", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Edit", "Edit", "Users", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Index", "Index", "Users", null, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-2">
+        <h3>Companies Buttons</h3>
+        <p>@Html.ActionLink("Create", "Create", "Companies", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Delete", "Delete", "Companies", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Details", "Details", "Companies", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Edit", "Edit", "Companies", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Index", "Index", "Companies", null, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-2">
+        <h3>Inventories Buttons</h3>
+        <p>@Html.ActionLink("Create", "Create", "Inventories", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Delete", "Delete", "Inventories", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Details", "Details", "Inventories", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Edit", "Edit", "Inventories", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Index", "Index", "Inventories", null, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-2">
+        <h3>Tickets Buttons</h3>
+        <p>@Html.ActionLink("Create", "Create", "Tickets", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Delete", "Delete", "Tickets", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Details", "Details", "Tickets", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Edit", "Edit", "Tickets", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Index", "Index", "Tickets", null, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-2">
+        <h3>Trackers Buttons</h3>
+        <p>@Html.ActionLink("Create", "Create", "Trackers", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Delete", "Delete", "Trackers", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Details", "Details", "Trackers", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Edit", "Edit", "Trackers", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Index", "Index", "Trackers", null, new { @class = "btn btn-default" })</p>
     </div>
 </div>
