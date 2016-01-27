@@ -47,7 +47,15 @@ namespace ITrack.Controllers
         // GET: Inventories/Create
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
         }
 
         // POST: Inventories/Create
