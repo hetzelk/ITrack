@@ -8,7 +8,10 @@ namespace ITrack.Models
 {
     public class ITrackDB : DbContext
     {
-        
+        public ITrackDB() : base("DefaultConnection")
+        {
+            
+        }
   
 
         public System.Data.Entity.DbSet<ITrack.Models.Tickets> Tickets { get; set; }

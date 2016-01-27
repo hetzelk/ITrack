@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201601271515427_inventorieschange.Designer.cs">
       <DependentUpon>201601271515427_inventorieschange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601271708580_newmigration.cs" />
+    <Compile Include="Migrations\201601271708580_newmigration.Designer.cs">
+      <DependentUpon>201601271708580_newmigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Companies.cs" />
@@ -302,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601271515427_inventorieschange.resx">
       <DependentUpon>201601271515427_inventorieschange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601271708580_newmigration.resx">
+      <DependentUpon>201601271708580_newmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
