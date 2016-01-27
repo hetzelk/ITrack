@@ -17,7 +17,15 @@ namespace ITrack.Controllers
         // GET: Trackers
         public ActionResult Index()
         {
-            return View(db.Trackers.ToList());
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View(db.Trackers.ToList());
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
         }
 
         // GET: Trackers/Details/5
@@ -38,7 +46,15 @@ namespace ITrack.Controllers
         // GET: Trackers/Create
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
         }
 
         // POST: Trackers/Create
@@ -46,7 +62,7 @@ namespace ITrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TimeOut,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Create([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {
