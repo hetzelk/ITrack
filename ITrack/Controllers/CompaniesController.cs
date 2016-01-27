@@ -17,7 +17,15 @@ namespace ITrack.Controllers
         // GET: Companies
         public ActionResult Index()
         {
-            return View(db.Companies.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(db.Companies.ToList());
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
         }
 
         // GET: Companies/Details/5
@@ -38,7 +46,15 @@ namespace ITrack.Controllers
         // GET: Companies/Create
         public ActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
         }
 
         // POST: Companies/Create

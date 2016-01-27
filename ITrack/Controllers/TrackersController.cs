@@ -17,7 +17,7 @@ namespace ITrack.Controllers
         // GET: Trackers
         public ActionResult Index()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 return View(db.Trackers.ToList());
             }
@@ -46,7 +46,7 @@ namespace ITrack.Controllers
         // GET: Trackers/Create
         public ActionResult Create()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 return View();
             }

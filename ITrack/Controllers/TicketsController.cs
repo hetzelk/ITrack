@@ -46,7 +46,15 @@ namespace ITrack.Controllers
         // GET: Tickets/Create
         public ActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
         }
 
         // POST: Tickets/Create
