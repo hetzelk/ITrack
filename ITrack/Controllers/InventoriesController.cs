@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
+using System.Web.Security;
 
 namespace ITrack.Controllers
 {
@@ -14,12 +15,20 @@ namespace ITrack.Controllers
     {
         private ITrackDB db = new ITrackDB();
 
+
         // GET: Inventories
         public ActionResult Index()
         {
-            return View(db.Inventories.ToList());
-        }
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View(db.Inventories.ToList());
+            }
 
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
+        }
         // GET: Inventories/Details/5
         public ActionResult Details(int? id)
         {

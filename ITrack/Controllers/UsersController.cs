@@ -16,13 +16,13 @@ namespace ITrack.Controllers
     public class UsersController : Controller
     {
         private ITrackDB db = new ITrackDB();
-        IdentityUser iu = new IdentityUser();
+        
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(iu.UserName);
-            //return View(db.Users.ToList());
+            
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
