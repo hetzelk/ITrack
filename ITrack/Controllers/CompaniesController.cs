@@ -1,23 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ITrack.Models;
 
 namespace ITrack.Controllers
 {
     public class CompaniesController : Controller
     {
+        private ITrackDB db = new ITrackDB();
+
         // GET: Companies
         public ActionResult Index()
         {
-            return View();
+            return View(db.Companies.ToList());
         }
 
         // GET: Companies/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Companies companies = db.Companies.Find(id);
+            if (companies == null)
+            {
+                return HttpNotFound();
+            }
+            return View(companies);
         }
 
         // GET: Companies/Create
@@ -27,63 +42,86 @@ namespace ITrack.Controllers
         }
 
         // POST: Companies/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CompaniesId,CompanyName")] Companies companies)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.Companies.Add(companies);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(companies);
         }
 
         // GET: Companies/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Companies companies = db.Companies.Find(id);
+            if (companies == null)
+            {
+                return HttpNotFound();
+            }
+            return View(companies);
         }
 
         // POST: Companies/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "CompaniesId,CompanyName")] Companies companies)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(companies).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(companies);
         }
 
         // GET: Companies/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Companies companies = db.Companies.Find(id);
+            if (companies == null)
+            {
+                return HttpNotFound();
+            }
+            return View(companies);
         }
 
         // POST: Companies/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Companies companies = db.Companies.Find(id);
+            db.Companies.Remove(companies);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

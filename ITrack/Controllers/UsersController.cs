@@ -1,23 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ITrack.Models;
 
 namespace ITrack.Controllers
 {
     public class UsersController : Controller
     {
+        private ITrackDB db = new ITrackDB();
+
         // GET: Users
         public ActionResult Index()
         {
-            return View();
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            return View(users);
         }
 
         // GET: Users/Create
@@ -27,63 +42,86 @@ namespace ITrack.Controllers
         }
 
         // POST: Users/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,UserId,Name,Company,Email,Password")] Users users)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.Users.Add(users);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(users);
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            return View(users);
         }
 
         // POST: Users/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,UserId,Name,Company,Email,Password")] Users users)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(users);
         }
 
         // GET: Users/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            return View(users);
         }
 
         // POST: Users/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Users users = db.Users.Find(id);
+            db.Users.Remove(users);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

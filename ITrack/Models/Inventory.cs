@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace ITrack.Models
 {
-    public class Inventory : DbContext
+    public class Inventory 
     {
         public int ID { get; set; }
         public string ProductName { get; set; }
@@ -14,6 +14,6 @@ namespace ITrack.Models
         public string Company { get; set; }
         public bool Home { get; set; }
         public string Description { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

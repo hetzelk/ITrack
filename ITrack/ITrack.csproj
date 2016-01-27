@@ -170,11 +170,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
-    <Compile Include="Controllers\TrackerController.cs" />
+    <Compile Include="Controllers\TrackersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,10 +182,13 @@
     <Compile Include="Migrations\201601262044190_InitialMigration.Designer.cs">
       <DependentUpon>201601262044190_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601271515427_inventorieschange.cs" />
+    <Compile Include="Migrations\201601271515427_inventorieschange.Designer.cs">
+      <DependentUpon>201601271515427_inventorieschange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Companies.cs" />
-    <Compile Include="Models\CompaniesInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ITrackDB.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -194,12 +196,7 @@
     <Compile Include="Models\Tickets.cs" />
     <Compile Include="Models\Tracker.cs" />
     <Compile Include="Models\Roles.cs" />
-    <Compile Include="Models\TicketsInitializer.cs" />
-    <Compile Include="Models\InventoryInitializer.cs" />
-    <Compile Include="Models\RolesInitializer.cs" />
-    <Compile Include="Models\TrackerInitializer.cs" />
     <Compile Include="Models\Users.cs" />
-    <Compile Include="Models\UsersInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -258,15 +255,37 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Tickets\Create.cshtml" />
+    <Content Include="Views\Tickets\Delete.cshtml" />
+    <Content Include="Views\Tickets\Details.cshtml" />
+    <Content Include="Views\Tickets\Edit.cshtml" />
+    <Content Include="Views\Tickets\Index.cshtml" />
+    <Content Include="Views\Companies\Create.cshtml" />
+    <Content Include="Views\Companies\Delete.cshtml" />
+    <Content Include="Views\Companies\Details.cshtml" />
+    <Content Include="Views\Companies\Edit.cshtml" />
+    <Content Include="Views\Companies\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Trackers\Create.cshtml" />
+    <Content Include="Views\Trackers\Delete.cshtml" />
+    <Content Include="Views\Trackers\Details.cshtml" />
+    <Content Include="Views\Trackers\Edit.cshtml" />
+    <Content Include="Views\Trackers\Index.cshtml" />
+    <Content Include="Views\Inventories\Create.cshtml" />
+    <Content Include="Views\Inventories\Delete.cshtml" />
+    <Content Include="Views\Inventories\Details.cshtml" />
+    <Content Include="Views\Inventories\Edit.cshtml" />
+    <Content Include="Views\Inventories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Companies\" />
     <Folder Include="Views\Inventory\" />
     <Folder Include="Views\Roles\" />
-    <Folder Include="Views\Tickets\" />
     <Folder Include="Views\Tracker\" />
-    <Folder Include="Views\Users\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +299,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601262044190_InitialMigration.resx">
       <DependentUpon>201601262044190_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601271515427_inventorieschange.resx">
+      <DependentUpon>201601271515427_inventorieschange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

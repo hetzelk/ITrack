@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ITrack.Models
 {
-    public class Companies : DbContext
+    public class Companies 
     {
         public int CompaniesId { get; set; }
         public string CompanyName { get; set; }

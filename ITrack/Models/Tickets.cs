@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace ITrack.Models
 {
-    public class Tickets : DbContext
+    public class Tickets 
     {
         public int ID { get; set; }
         public string Client { get; set; }

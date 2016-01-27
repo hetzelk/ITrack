@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace ITrack.Models
 {
-    public class Tracker : DbContext
+    public class Tracker 
     {
         public int ID { get; set; }
         public string TimeOut { get; set; }
