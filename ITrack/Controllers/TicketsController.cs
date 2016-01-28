@@ -13,7 +13,7 @@ namespace ITrack.Controllers
     public class TicketsController : Controller
     {
         private ITrackDB db = new ITrackDB();
-
+        
         // GET: Tickets
         public ActionResult Index()
         {
@@ -56,10 +56,10 @@ namespace ITrack.Controllers
                 return Redirect("~/Account/Login");
             }
         }
-
+        
         public ActionResult ViewOpenTickets()
         {
-      
+            
             if (User.Identity.IsAuthenticated)
             {
                 return View(db.Tickets.ToList());
@@ -110,6 +110,7 @@ namespace ITrack.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Client,Company,Details,TimeRequest,Priority,Employee,Completed,TimeCompleted")] Tickets tickets)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(tickets).State = EntityState.Modified;

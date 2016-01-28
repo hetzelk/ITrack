@@ -9,7 +9,7 @@ namespace ITrack.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ITrack.Models.ITrackDB context)
