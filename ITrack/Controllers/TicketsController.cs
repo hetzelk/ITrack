@@ -7,19 +7,26 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ITrack.Controllers
 {
     public class TicketsController : Controller
     {
         private ITrackDB db = new ITrackDB();
-        
+        ApplicationDbContext context = new ApplicationDbContext();
+
         // GET: Tickets
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
+
+                
                 return View(db.Tickets.ToList());
+
             }
             else
             {
@@ -56,13 +63,29 @@ namespace ITrack.Controllers
                 return Redirect("~/Account/Login");
             }
         }
-        
+
         public ActionResult ViewOpenTickets()
         {
-            
+            ViewResult result;
             if (User.Identity.IsAuthenticated)
             {
-                return View(db.Tickets.ToList());
+                var UserID = User.Identity.GetUserId();
+                List<Tickets> listOfTickets = new List<Tickets>();
+               
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                foreach (var ticket in db.Tickets)
+                {
+                    if (ticket.Company == userCompany)
+                    {
+                        listOfTickets.Add(ticket);
+                    }
+                    else
+                    {
+                        result = View();
+                    }
+                }
+                result = View(listOfTickets);
+                return result;
             }
 
             else
@@ -82,7 +105,7 @@ namespace ITrack.Controllers
             {
                 db.Tickets.Add(tickets);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewOpenTickets");
             }
 
             return View(tickets);
@@ -110,7 +133,6 @@ namespace ITrack.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Client,Company,Details,TimeRequest,Priority,Employee,Completed,TimeCompleted")] Tickets tickets)
         {
-            
             if (ModelState.IsValid)
             {
                 db.Entry(tickets).State = EntityState.Modified;

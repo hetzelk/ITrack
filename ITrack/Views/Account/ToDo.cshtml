@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<ITrack.Models.Tracker>
-@{ string userName = "Keith H."; }
+@{ string userName = User.Identity.Name; }
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>To Do List for Current user</h2>
-
+<p>@userName, these are your curent jobs.</p>
 <table class="table">
     <tr>
         <th>
