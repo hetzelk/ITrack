@@ -1,11 +1,12 @@
 ﻿@model ITrack.Models.Tracker
-
-
-@{
+@using ITrack.Models;
+@{ ApplicationUser user = new ApplicationUser();
+    string company = user.Company.ToString();}
+@{ 
     ViewBag.Title = "Create";
 }
-<h2>Create</h2>
 
+<h2>Create</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -49,6 +50,8 @@
             @Html.LabelFor(model => model.Employee, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Employee, new { htmlAttributes = new { @class = "form-control" } })
+                
+                    @{ string employeeCompanyHome = user.Company; }
                 @Html.ValidationMessageFor(model => model.Employee, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,6 +61,15 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Company, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @company
+                @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
             </div>
         </div>
 

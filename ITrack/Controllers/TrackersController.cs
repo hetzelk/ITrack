@@ -17,14 +17,18 @@ namespace ITrack.Controllers
         // GET: Trackers
         public ActionResult Index()
         {
-            List<string> employeeList = new List<string>();
+            ApplicationUser user = new ApplicationUser();
+            List<Tracker> employeeList = new List<Tracker>();
             if (User.Identity.IsAuthenticated)
             {
                 foreach(ITrack.Models.Tracker item in db.Trackers.ToList())
                 {
-                    employeeList.Add(item.Employee);
+                    if(item.Company == user.Company)
+                    {
+                        employeeList.Add(item);
+                    }
                 }
-                return View(db.Trackers.ToList()/*, employeeList*/);
+                return View(employeeList/*db.Trackers.ToList(), employeeList*/);
             }
 
             else
@@ -67,7 +71,7 @@ namespace ITrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Create([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate,Company")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +103,7 @@ namespace ITrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Edit([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate,Company")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {
