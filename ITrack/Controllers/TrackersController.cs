@@ -99,7 +99,7 @@ namespace ITrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TimeOut,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Edit([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {
