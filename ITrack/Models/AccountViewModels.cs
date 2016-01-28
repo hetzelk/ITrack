@@ -79,6 +79,12 @@ namespace ITrack.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Company")]
+        public string Company { get; set; }
+        [Display(Name = "Name")]
+        public string EmployeeName { get; set; }
+
     }
 
     public class ResetPasswordViewModel

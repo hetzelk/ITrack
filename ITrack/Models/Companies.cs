@@ -10,5 +10,6 @@ namespace ITrack.Models
     {
         public int CompaniesId { get; set; }
         public string CompanyName { get; set; }
+        //public virtual List<Users> user { get; set; }
     }
 }
