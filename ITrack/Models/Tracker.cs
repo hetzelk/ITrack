@@ -15,5 +15,6 @@ namespace ITrack.Models
         public string Location { get; set; }
         public string Employee { get; set; }
         public string ReturnDate { get; set; }
+        public string Company { get; set; }
     }
 }
