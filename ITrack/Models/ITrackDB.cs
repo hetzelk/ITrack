@@ -18,8 +18,6 @@ namespace ITrack.Models
 
         public System.Data.Entity.DbSet<ITrack.Models.Companies> Companies { get; set; }
 
-        public System.Data.Entity.DbSet<ITrack.Models.Users> Users { get; set; }
-
         public System.Data.Entity.DbSet<ITrack.Models.Tracker> Trackers { get; set; }
 
         public System.Data.Entity.DbSet<ITrack.Models.Inventory> Inventories { get; set; }
