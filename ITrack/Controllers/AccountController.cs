@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ITrack.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ITrack.Controllers
 {
@@ -17,6 +18,7 @@ namespace ITrack.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        ApplicationDbContext context = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -164,11 +166,15 @@ namespace ITrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Company = model.Company,EmployeeName = model.EmployeeName };
+                //var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    AddUserToRole(user.UserName, "CompanyAdmin");
+                    
+
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -180,9 +186,26 @@ namespace ITrack.Controllers
                 }
                 AddErrors(result);
             }
+            
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        internal void AddUserToRole(string userName, string roleName)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            try
+            {
+                var user = UserManager.FindByName(userName);
+                UserManager.AddToRole(user.Id, roleName);
+                context.SaveChanges();
+            }
+            catch 
+            {
+
+                throw;
+            }
         }
 
         //
