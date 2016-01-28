@@ -17,9 +17,14 @@ namespace ITrack.Controllers
         // GET: Trackers
         public ActionResult Index()
         {
+            List<string> employeeList = new List<string>();
             if (User.Identity.IsAuthenticated)
             {
-                return View(db.Trackers.ToList());
+                foreach(ITrack.Models.Tracker item in db.Trackers.ToList())
+                {
+                    employeeList.Add(item.Employee);
+                }
+                return View(db.Trackers.ToList()/*, employeeList*/);
             }
 
             else
@@ -94,7 +99,7 @@ namespace ITrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TimeOut,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Edit([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {
