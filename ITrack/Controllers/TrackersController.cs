@@ -27,7 +27,7 @@ namespace ITrack.Controllers
                 return Redirect("~/Account/Login");
             }
         }
-
+        
         // GET: Trackers/Details/5
         public ActionResult Details(int? id)
         {

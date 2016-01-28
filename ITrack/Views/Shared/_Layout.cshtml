@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ITrack*</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -39,6 +39,7 @@
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Ticket Index", "Index", "Tickets")</li>
                             <li>@Html.ActionLink("Create", "Create", "Tickets")</li>
+                            <li>@Html.ActionLink("Open Tickets", "Create", "Tickets")</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -57,7 +58,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ITrack<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></p>
         </footer>
     </div>
 
