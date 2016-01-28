@@ -61,6 +61,19 @@ namespace ITrack.Controllers
             return View();
         }
 
+        private ITrackDB db = new ITrackDB();
+        public ActionResult ToDo()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(db.Trackers.ToList());
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
+        }
         //
         // POST: /Account/Login
         [HttpPost]

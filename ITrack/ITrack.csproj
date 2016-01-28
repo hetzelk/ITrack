@@ -284,7 +284,11 @@
     <Content Include="Views\Inventories\Details.cshtml" />
     <Content Include="Views\Inventories\Edit.cshtml" />
     <Content Include="Views\Inventories\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Tickets\ViewOpenTickets.cshtml" />
+=======
+    <Content Include="Views\Account\ToDo.cshtml" />
+>>>>>>> c686ab5e2563252ffdea5e4f3dabc42601ab92dc
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
