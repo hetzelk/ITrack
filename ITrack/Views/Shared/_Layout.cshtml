@@ -20,7 +20,7 @@
                 @Html.ActionLink("ITrack*", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
                 <ul class="nav navbar-nav">
-                   @if (User.IsInRole("CompanyAdmin"))
+                   @if (User.IsInRole("MasterAdmin"))
                    {
                      <li class="dropdown">
                        
