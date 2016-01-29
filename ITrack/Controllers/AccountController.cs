@@ -166,16 +166,14 @@ namespace ITrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Company = model.Company,EmployeeName = model.EmployeeName };
+                var user = new ApplicationUser { UserName = model.EmployeeName, Email = model.Email, Company = model.Company, EmployeeName = model.EmployeeName };
                 //var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
                 var result = await UserManager.CreateAsync(user, model.Password);
+                    AddUserToRole(user.UserName, "CompanyAdmin");
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    AddUserToRole(user.UserName, "CompanyAdmin");
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -186,11 +184,26 @@ namespace ITrack.Controllers
                 }
                 AddErrors(result);
             }
-            
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        // POST: /Account/CreateNewEmployee
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateNewEmployee(CreateNewEmployeeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.EmployeeName, Email = model.Email, Company = model.Company, EmployeeName = model.EmployeeName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                AddUserToRole(user.Email, "CompanyEmployee");
+                AddErrors(result);
+            }
+            return View(model);
+        }
+
         internal void AddUserToRole(string userName, string roleName)
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -210,11 +223,9 @@ namespace ITrack.Controllers
                     UserManager.AddToRole(user.Id, roleName);
                     context.SaveChanges();
                 }
-                
             }
             catch 
             {
-
                 throw;
             }
         }

@@ -274,6 +274,8 @@
     <Content Include="Views\Account\ToDo.cshtml" />
     <Content Include="Views\DropDownList\Index.cshtml" />
     <Content Include="Views\Inventories\Catalog.cshtml" />
+    <Content Include="Views\Companies\CreateNewEmployee.cshtml" />
+    <Content Include="Views\Account\CreateNewEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

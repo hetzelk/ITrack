@@ -31,3 +31,7 @@ textarea {
 .none{
     display:none;
 }
+
+.extraWide{
+    width:300px;
+}
