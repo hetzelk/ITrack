@@ -15,6 +15,7 @@ namespace ITrack.Controllers
         private ITrackDB db = new ITrackDB();
 
         // GET: Companies
+        [Authorize(Roles = "CompanyAdmin")]
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
