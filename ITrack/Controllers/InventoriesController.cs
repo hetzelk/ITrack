@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ITrack.Controllers
 {
@@ -19,9 +21,26 @@ namespace ITrack.Controllers
         // GET: Inventories
         public ActionResult Index()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
+            ViewResult result;
+            if (User.Identity.IsAuthenticated)
             {
-                return View(db.Inventories.ToList());
+                var UserID = User.Identity.GetUserId();
+                List<Inventory> ListOfCompanyItems = new List<Inventory>();
+
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                foreach (var items in db.Inventories)
+                {
+                    if (items.Company == userCompany)
+                    {
+                        ListOfCompanyItems.Add(items);
+                    }
+                    else
+                    {
+                        result = View();
+                    }
+                }
+                result = View(ListOfCompanyItems);
+                return result;
             }
 
             else
@@ -29,6 +48,38 @@ namespace ITrack.Controllers
                 return Redirect("~/Account/Login");
             }
         }
+
+        // GET: Inventories
+        public ActionResult Catalog()
+        {
+            ViewResult result;
+            if (User.Identity.IsAuthenticated)
+            {
+                var UserID = User.Identity.GetUserId();
+                List<Inventory> ListOfCompanyItems = new List<Inventory>();
+
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                foreach (var items in db.Inventories)
+                {
+                    if (items.Company == userCompany)
+                    {
+                        ListOfCompanyItems.Add(items);
+                    }
+                    else
+                    {
+                        result = View();
+                    }
+                }
+                result = View(ListOfCompanyItems);
+                return result;
+            }
+
+            else
+            {
+                return Redirect("~/Account/Login");
+            }
+        }
+
         // GET: Inventories/Details/5
         public ActionResult Details(int? id)
         {
@@ -47,6 +98,9 @@ namespace ITrack.Controllers
         // GET: Inventories/Create
         public ActionResult Create()
         {
+            var UserID = User.Identity.GetUserId();
+            string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+            ViewBag.CompanyName = userCompany;
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 return View();

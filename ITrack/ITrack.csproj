@@ -273,6 +273,7 @@
     <Content Include="Views\Tickets\ViewOpenTickets.cshtml" />
     <Content Include="Views\Account\ToDo.cshtml" />
     <Content Include="Views\DropDownList\Index.cshtml" />
+    <Content Include="Views\Inventories\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
