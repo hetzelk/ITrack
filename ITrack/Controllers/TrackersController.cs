@@ -7,28 +7,40 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ITrack.Controllers
 {
     public class TrackersController : Controller
     {
         private ITrackDB db = new ITrackDB();
+        ApplicationDbContext context = new ApplicationDbContext();
 
         // GET: Trackers
         public ActionResult Index()
         {
-            ApplicationUser user = new ApplicationUser();
-            List<Tracker> employeeList = new List<Tracker>();
+            ViewResult result;
             if (User.Identity.IsAuthenticated)
             {
-                foreach(ITrack.Models.Tracker item in db.Trackers.ToList())
+                var UserID = User.Identity.GetUserId();
+                List<Tracker> listOfTrackers = new List<Tracker>();
+
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                foreach (var tracks in db.Trackers)
                 {
-                    if(item.Company == user.Company)
+                    if (tracks.Company == userCompany)
                     {
-                        employeeList.Add(item);
+                        listOfTrackers.Add(tracks);
+                    }
+                    else
+                    {
+                        result = View();
                     }
                 }
-                return View(employeeList/*db.Trackers.ToList(), employeeList*/);
+                result = View(listOfTrackers);
+                return result;
             }
 
             else
@@ -57,6 +69,20 @@ namespace ITrack.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                var UserID = User.Identity.GetUserId();
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                ApplicationDbContext context = new ApplicationDbContext();
+                List<ApplicationUser> AllDBUsers = context.Users.ToList();
+                List<ApplicationUser> companyUsers = new List<ApplicationUser>();
+                foreach (var user in AllDBUsers)
+                {
+                    if(user.Company == userCompany)
+                    {
+                        companyUsers.Add(user);
+                    }
+                }
+                ViewBag.CompanyName = userCompany;
+                ViewBag.UserList = companyUsers;
                 return View();
             }
 
@@ -65,6 +91,13 @@ namespace ITrack.Controllers
                 return Redirect("~/Account/Login");
             }
         }
+
+        //public ActionResult ShowAllNames()
+        //{
+        //    var users = Membership.GetAllUsers();
+
+        //    return View(users);
+        //}
 
         // POST: Trackers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

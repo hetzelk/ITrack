@@ -38,6 +38,8 @@
         <th></th>
     </tr>
 @foreach (var item in Model)
+{
+    if(ViewBag.CompanyName == item.Company)
     {
         <tr>
             <td>
@@ -71,6 +73,7 @@
             </td>
         </tr>
     }
+}
 
 
 
