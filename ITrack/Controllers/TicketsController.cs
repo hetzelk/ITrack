@@ -21,12 +21,12 @@ namespace ITrack.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-            var UserID = User.Identity.GetUserId();
-            string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
-            ViewBag.CompanyName = userCompany;
-            List<Tickets> CompanyTickets = new List<Tickets>();
             if (User.Identity.IsAuthenticated)
             {
+                var UserID = User.Identity.GetUserId();
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                ViewBag.CompanyName = userCompany;
+                List<Tickets> CompanyTickets = new List<Tickets>();
                 return View(db.Tickets.ToList());
             }
             else
