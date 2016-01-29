@@ -198,8 +198,19 @@ namespace ITrack.Controllers
             try
             {
                 var user = UserManager.FindByName(userName);
-                UserManager.AddToRole(user.Id, roleName);
-                context.SaveChanges();
+
+                if (context.Roles != null)
+                {
+                    UserManager.AddToRole(user.Id, roleName);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    context.Roles.Add(new IdentityRole(roleName));
+                    UserManager.AddToRole(user.Id, roleName);
+                    context.SaveChanges();
+                }
+                
             }
             catch 
             {

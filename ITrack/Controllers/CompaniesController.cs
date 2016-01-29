@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
-using System.Web.Security;
 
 namespace ITrack.Controllers
 {
@@ -16,7 +15,7 @@ namespace ITrack.Controllers
         private ITrackDB db = new ITrackDB();
 
         // GET: Companies
-       
+        [Authorize(Roles = "CompanyAdmin")]
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
