@@ -7,6 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITrack.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
+using System.Threading.Tasks;
 
 namespace ITrack.Controllers
 {
@@ -62,6 +67,8 @@ namespace ITrack.Controllers
             }
         }
 
+        
+
         // POST: Trackers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -79,6 +86,7 @@ namespace ITrack.Controllers
             return View(tracker);
         }
 
+        
         // GET: Trackers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -92,6 +100,13 @@ namespace ITrack.Controllers
                 return HttpNotFound();
             }
             return View(tracker);
+        }
+
+        public MembershipUserCollection ShowAllUsers()
+        {
+            var users = Membership.GetAllUsers();
+            //SelectList listOfUsers = new SelectList(users);
+            return users; 
         }
 
         // POST: Trackers/Edit/5

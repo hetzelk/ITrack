@@ -137,7 +137,7 @@ namespace ITrack.Controllers
             {
                 db.Entry(tickets).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewOpenTickets");
             }
             return View(tickets);
         }
@@ -165,7 +165,7 @@ namespace ITrack.Controllers
             Tickets tickets = db.Tickets.Find(id);
             db.Tickets.Remove(tickets);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewOpenTickets");
         }
 
         protected override void Dispose(bool disposing)

@@ -173,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoleAssignmentController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\TrackersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +190,7 @@
     <Compile Include="Models\ITrackDB.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Inventory.cs" />
+    <Compile Include="Models\RoleChange.cs" />
     <Compile Include="Models\Tickets.cs" />
     <Compile Include="Models\Tracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -278,6 +280,7 @@
     <Content Include="Views\Tickets\ViewOpenTickets.cshtml" />
     <Content Include="Views\Account\ToDo.cshtml" />
     <Content Include="Views\DropDownList\Index.cshtml" />
+    <Content Include="Views\RoleAssignment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

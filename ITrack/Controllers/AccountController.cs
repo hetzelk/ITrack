@@ -164,6 +164,7 @@ namespace ITrack.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Company = model.Company,EmployeeName = model.EmployeeName };
@@ -173,9 +174,7 @@ namespace ITrack.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     AddUserToRole(user.UserName, "CompanyAdmin");
-                    
-
-                    
+                    db.Companies.Add(new Companies { CompaniesId = 1, CompanyName = model.Company });
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
