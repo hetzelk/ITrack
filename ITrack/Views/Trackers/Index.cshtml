@@ -4,11 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Tracker Index</h2>
-<h4>Track all of your items and employees on the job. </h4>
+<h2>Tracker</h2>
+@if (User.IsInRole("MasterAdmin") || User.IsInRole("CompanyAdmin"))
+{
+    <h4>Track all of your items and employees on the job. </h4>
+}
 <br />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("MasterAdmin") || User.IsInRole("CompanyAdmin"))
+    {
+      @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table">
     <tr>

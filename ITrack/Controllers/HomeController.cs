@@ -22,7 +22,7 @@ namespace ITrack.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "ITrack*";
 
             return View();
         }
