@@ -13,7 +13,7 @@
             <ul class="dropdown-menu">
                 <li>@Html.ActionLink("Edit " + User.Identity.GetUserName() + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                 <li>@Html.ActionLink("To-Do List", "ToDo", "Account")</li>
-                <li>@Html.ActionLink("Create Employee", "CreateNewEmployee", "Companies")</li>
+                <li>@Html.ActionLink("Create Employee", "CreateNewEmployee", "Account")</li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
              </ul>
         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

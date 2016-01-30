@@ -158,6 +158,17 @@ namespace ITrack.Controllers
         }
 
         //
+        // GET: /Account/CreateNewEmployee
+        [AllowAnonymous]
+        public ActionResult CreateNewEmployee()
+        {
+            var UserID = User.Identity.GetUserId();
+            string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+            ViewBag.CompanyName = userCompany;
+            return View();
+        }
+
+        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -166,7 +177,7 @@ namespace ITrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.EmployeeName, Email = model.Email, Company = model.Company, EmployeeName = model.EmployeeName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Company = model.Company, EmployeeName = model.EmployeeName };
                 //var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
                 var result = await UserManager.CreateAsync(user, model.Password);
                     AddUserToRole(user.UserName, "CompanyAdmin");
@@ -196,9 +207,9 @@ namespace ITrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.EmployeeName, Email = model.Email, Company = model.Company, EmployeeName = model.EmployeeName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Company = model.Company, EmployeeName = model.EmployeeName };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                AddUserToRole(user.Email, "CompanyEmployee");
+                AddUserToRole(user.UserName, "CompanyEmployee");
                 AddErrors(result);
             }
             return View(model);
@@ -212,7 +223,7 @@ namespace ITrack.Controllers
             {
                 var user = UserManager.FindByName(userName);
 
-                if (context.Roles != null)
+                if (context.Roles == null)
                 {
                     UserManager.AddToRole(user.Id, roleName);
                     context.SaveChanges();
@@ -226,7 +237,7 @@ namespace ITrack.Controllers
             }
             catch 
             {
-                throw;
+                RedirectToAction("Index", "Home");
             }
         }
 
