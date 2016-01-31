@@ -13,23 +13,37 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Security;
 using System.Threading.Tasks;
 
+
 namespace ITrack.Controllers
 {
     public class TrackersController : Controller
     {
         private ITrackDB db = new ITrackDB();
+        ApplicationDbContext context = new ApplicationDbContext();
 
         // GET: Trackers
         public ActionResult Index()
         {
-            List<string> employeeList = new List<string>();
+            ViewResult result;
             if (User.Identity.IsAuthenticated)
             {
-                foreach(ITrack.Models.Tracker item in db.Trackers.ToList())
+                var UserID = User.Identity.GetUserId();
+                List<Tracker> listOfTrackers = new List<Tracker>();
+
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                foreach (var tracks in db.Trackers)
                 {
-                    employeeList.Add(item.Employee);
+                    if (tracks.Company == userCompany)
+                    {
+                        listOfTrackers.Add(tracks);
+                    }
+                    else
+                    {
+                        result = View();
+                    }
                 }
-                return View(db.Trackers.ToList()/*, employeeList*/);
+                result = View(listOfTrackers);
+                return result;
             }
 
             else
@@ -58,6 +72,20 @@ namespace ITrack.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                var UserID = User.Identity.GetUserId();
+                string userCompany = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(UserID).Company;
+                ApplicationDbContext context = new ApplicationDbContext();
+                List<ApplicationUser> AllDBUsers = context.Users.ToList();
+                List<ApplicationUser> companyUsers = new List<ApplicationUser>();
+                foreach (var user in AllDBUsers)
+                {
+                    if(user.Company == userCompany)
+                    {
+                        companyUsers.Add(user);
+                    }
+                }
+                ViewBag.CompanyName = userCompany;
+                ViewBag.UserList = companyUsers;
                 return View();
             }
 
@@ -67,14 +95,21 @@ namespace ITrack.Controllers
             }
         }
 
-        
+
+        //public ActionResult ShowAllNames()
+        //{
+        //    var users = Membership.GetAllUsers();
+
+        //    return View(users);
+        //}
+
 
         // POST: Trackers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Create([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate,Company")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +149,7 @@ namespace ITrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate")] Tracker tracker)
+        public ActionResult Edit([Bind(Include = "ID,TimeOut,TicketID,Details,Location,Employee,ReturnDate,Company")] Tracker tracker)
         {
             if (ModelState.IsValid)
             {

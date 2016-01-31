@@ -262,11 +262,6 @@
     <Content Include="Views\Companies\Details.cshtml" />
     <Content Include="Views\Companies\Edit.cshtml" />
     <Content Include="Views\Companies\Index.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Trackers\Create.cshtml" />
     <Content Include="Views\Trackers\Delete.cshtml" />
     <Content Include="Views\Trackers\Details.cshtml" />
@@ -281,13 +276,12 @@
     <Content Include="Views\Account\ToDo.cshtml" />
     <Content Include="Views\DropDownList\Index.cshtml" />
     <Content Include="Views\RoleAssignment\Index.cshtml" />
+    <Content Include="Views\Inventories\Catalog.cshtml" />
+    <Content Include="Views\Companies\CreateNewEmployee.cshtml" />
+    <Content Include="Views\Account\CreateNewEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Inventory\" />
-    <Folder Include="Views\Roles\" />
-    <Folder Include="Views\Tracker\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
