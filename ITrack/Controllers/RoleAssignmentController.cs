@@ -21,22 +21,21 @@ namespace ITrack.Controllers
         RoleChange usersDb = new RoleChange();
 
         // GET: RoleAssignment
-        
+        [HttpGet]
         public ActionResult Index()
         {
 
            
             return View(GetAllUrsersAndRolls());
         }
-
-
-
+    
+        
         [HttpPost]
         public ActionResult  Index(string selectedRole, string selectedEmployee)
         {
 
             AddToRole(selectedRole, selectedEmployee);
-            return Redirect("Index");
+            return Redirect("RoleAssignment");
            
         }
 
