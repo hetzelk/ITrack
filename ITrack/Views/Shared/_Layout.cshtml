@@ -18,6 +18,8 @@
                 </button>
                 @Html.ActionLink("ITrack*", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+            @if (User.IsInRole("MasterAdmin") || User.IsInRole("CompanyAdmin") || User.IsInRole("CompanyEmployee"))
+            {
                 <ul class="nav navbar-nav">
                    @if (User.IsInRole("MasterAdmin"))
                    {
@@ -69,6 +71,7 @@
                     }
 
                 </ul>
+            }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

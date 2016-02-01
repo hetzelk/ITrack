@@ -59,7 +59,6 @@ namespace ITrack.Controllers
 
         public RoleChange GetAllUrsersAndRolls()
         {
-            var users = Membership.GetAllUsers();
             var Model = new RoleChange
             {
                 Users = context.Users.Select(x => new SelectListItem
