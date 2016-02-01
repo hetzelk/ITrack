@@ -21,14 +21,14 @@ namespace ITrack.Controllers
         RoleChange usersDb = new RoleChange();
 
         // GET: RoleAssignment
-        
+        [HttpGet]
         public ActionResult Index()
         {
 
            
             return View(GetAllUrsersAndRolls());
         }
-
+    
 
 
         [HttpPost]

@@ -63,6 +63,12 @@
                             }
                         </ul>
                     </li>
+
+                    @if (User.IsInRole("MasterAdmin") || User.IsInRole("CompanyAdmin"))
+                    {
+                        <li>@Html.ActionLink("Change Employee Role", "Index", "RoleAssignment")</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

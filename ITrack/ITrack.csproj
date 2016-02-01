@@ -279,6 +279,7 @@
     <Content Include="Views\Inventories\Catalog.cshtml" />
     <Content Include="Views\Companies\CreateNewEmployee.cshtml" />
     <Content Include="Views\Account\CreateNewEmployee.cshtml" />
+    <Content Include="Views\RoleAssignment\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
